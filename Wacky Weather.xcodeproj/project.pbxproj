@@ -11,15 +11,17 @@
 		55FE2CBF296C6F150049D17F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FE2CBE296C6F150049D17F /* ContentView.swift */; };
 		55FE2CC1296C6F160049D17F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55FE2CC0296C6F160049D17F /* Assets.xcassets */; };
 		55FE2CC4296C6F160049D17F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55FE2CC3296C6F160049D17F /* Preview Assets.xcassets */; };
+		55FE2CEF296DF8B40049D17F /* scratchpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FE2CEE296DF8B40049D17F /* scratchpad.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		55FE2CB9296C6F150049D17F /* Wacky Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wacky Weather.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55FE2CB9296C6F150049D17F /* Drunk Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Drunk Weather.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55FE2CBC296C6F150049D17F /* Wacky_WeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wacky_WeatherApp.swift; sourceTree = "<group>"; };
 		55FE2CBE296C6F150049D17F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		55FE2CC0296C6F160049D17F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55FE2CC3296C6F160049D17F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		55FE2CCA296C78A90049D17F /* Wacky Weather.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Wacky Weather.entitlements"; sourceTree = "<group>"; };
+		55FE2CEE296DF8B40049D17F /* scratchpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = scratchpad.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +46,7 @@
 		55FE2CBA296C6F150049D17F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				55FE2CB9296C6F150049D17F /* Wacky Weather.app */,
+				55FE2CB9296C6F150049D17F /* Drunk Weather.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -55,6 +57,7 @@
 				55FE2CCA296C78A90049D17F /* Wacky Weather.entitlements */,
 				55FE2CBC296C6F150049D17F /* Wacky_WeatherApp.swift */,
 				55FE2CBE296C6F150049D17F /* ContentView.swift */,
+				55FE2CEE296DF8B40049D17F /* scratchpad.swift */,
 				55FE2CC0296C6F160049D17F /* Assets.xcassets */,
 				55FE2CC2296C6F160049D17F /* Preview Content */,
 			);
@@ -86,7 +89,7 @@
 			);
 			name = "Wacky Weather";
 			productName = "Wacky Weather";
-			productReference = 55FE2CB9296C6F150049D17F /* Wacky Weather.app */;
+			productReference = 55FE2CB9296C6F150049D17F /* Drunk Weather.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55FE2CBF296C6F150049D17F /* ContentView.swift in Sources */,
+				55FE2CEF296DF8B40049D17F /* scratchpad.swift in Sources */,
 				55FE2CBD296C6F150049D17F /* Wacky_WeatherApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,7 +288,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vividpicture.Wacky-Weather";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Drunk Weather";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -314,7 +318,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vividpicture.Wacky-Weather";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Drunk Weather";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
