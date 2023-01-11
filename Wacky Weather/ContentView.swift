@@ -90,8 +90,8 @@ struct ContentView: View {
                         case .authorizedWhenInUse:  // Location services are available.
                             // Insert code here of what should happen when Location services are authorized
                             
-                            let theLatitude = locationDataManager.locationManager.location?.coordinate.latitude.description
-                            let theLongitude = locationDataManager.locationManager.location?.coordinate.longitude.description
+                            //let theLatitude = locationDataManager.locationManager.location?.coordinate.latitude.description
+                            //let theLongitude = locationDataManager.locationManager.location?.coordinate.longitude.description
                             
                             Text("Your current location is:")
                             Text("Latitude: \(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")")
