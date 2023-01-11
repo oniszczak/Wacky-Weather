@@ -14,11 +14,14 @@ struct ContentView: View {
     
     let synthesizer = AVSpeechSynthesizer()
     
-    static let location =
-    CLLocation(
-        latitude: .init(floatLiteral: 43.6588820),
-        longitude: .init(floatLiteral: -79.4852880)
-    )
+    
+//***********************************************************
+    //static let location =
+    //static let location =
+    //CLLocation(
+    //    latitude: .init(floatLiteral: 43.6588820),
+    //    longitude: .init(floatLiteral: 79.4852880)
+    //)
     
     @State var weather: Weather?
     @State var attribution: WeatherAttribution?
@@ -31,20 +34,36 @@ struct ContentView: View {
     @AppStorage("isDarkMode") private var isDarkMode = false
     
     func getWeather() async {
-        do {
-            weather = try await Task
-            {
-                try await WeatherService.shared.weather(for: Self.location)
-            }.value
-        } catch {
-            fatalError("\(error)")
+        
+        if let theLatitude = locationDataManager.locationManager.location?.coordinate.latitude.description {
+            if let theLongitude = locationDataManager.locationManager.location?.coordinate.longitude.description {
+                
+                let realLocation =
+                CLLocation(
+                    latitude: .init(floatLiteral: CLLocationDegrees(theLatitude)!),
+                    longitude: .init(floatLiteral: CLLocationDegrees(theLongitude)!)
+                )
+                
+                do {
+                    weather = try await Task
+                    {
+                        //try await WeatherService.shared.weather(for: Self.location)
+                        try await WeatherService.shared.weather(for: realLocation)
+                    }.value
+                } catch {
+                    fatalError("\(error)")
+                }
+                
+            }
         }
+        
     }
     
     func speakWeather(_ Temperature: String, _ Description: String) -> Void {
         print ("speakWeather")
         
-        let fullSentence = "It's " + Description + "outside. And the temperature is exactly " + Temperature + ". Yaaaaaaaaaaaay!"
+        //let fullSentence = "It's " + Description + "outside. And the temperature is exactly " + Temperature + ". Yaaaaaaaaaaaay!"
+        let fullSentence = "The temperature is exactly " + Temperature + ". Yaaaaaaaaaaaay!"
         
         let utterance = AVSpeechUtterance(string: fullSentence)
         utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
@@ -63,10 +82,17 @@ struct ContentView: View {
             let theDescription = weather.currentWeather.condition.description
             
             
+            //let theLatitude = locationDataManager.locationManager.location?.coordinate.latitude.description
+            //let theLongitude = locationDataManager.locationManager.location?.coordinate.longitude.description
+            
             VStack {
                         switch locationDataManager.locationManager.authorizationStatus {
                         case .authorizedWhenInUse:  // Location services are available.
                             // Insert code here of what should happen when Location services are authorized
+                            
+                            let theLatitude = locationDataManager.locationManager.location?.coordinate.latitude.description
+                            let theLongitude = locationDataManager.locationManager.location?.coordinate.longitude.description
+                            
                             Text("Your current location is:")
                             Text("Latitude: \(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")")
                             Text("Longitude: \(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")")
