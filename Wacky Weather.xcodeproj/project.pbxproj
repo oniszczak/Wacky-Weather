@@ -12,6 +12,7 @@
 		55FE2CC1296C6F160049D17F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55FE2CC0296C6F160049D17F /* Assets.xcassets */; };
 		55FE2CC4296C6F160049D17F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55FE2CC3296C6F160049D17F /* Preview Assets.xcassets */; };
 		55FE2CEF296DF8B40049D17F /* scratchpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FE2CEE296DF8B40049D17F /* scratchpad.swift */; };
+		55FE2CF1296E3ABB0049D17F /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FE2CF0296E3ABB0049D17F /* LocationDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		55FE2CC3296C6F160049D17F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		55FE2CCA296C78A90049D17F /* Wacky Weather.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Wacky Weather.entitlements"; sourceTree = "<group>"; };
 		55FE2CEE296DF8B40049D17F /* scratchpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = scratchpad.swift; sourceTree = "<group>"; };
+		55FE2CF0296E3ABB0049D17F /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				55FE2CCA296C78A90049D17F /* Wacky Weather.entitlements */,
 				55FE2CBC296C6F150049D17F /* Wacky_WeatherApp.swift */,
 				55FE2CBE296C6F150049D17F /* ContentView.swift */,
+				55FE2CF0296E3ABB0049D17F /* LocationDataManager.swift */,
 				55FE2CEE296DF8B40049D17F /* scratchpad.swift */,
 				55FE2CC0296C6F160049D17F /* Assets.xcassets */,
 				55FE2CC2296C6F160049D17F /* Preview Content */,
@@ -144,6 +147,7 @@
 			files = (
 				55FE2CBF296C6F150049D17F /* ContentView.swift in Sources */,
 				55FE2CEF296DF8B40049D17F /* scratchpad.swift in Sources */,
+				55FE2CF1296E3ABB0049D17F /* LocationDataManager.swift in Sources */,
 				55FE2CBD296C6F150049D17F /* Wacky_WeatherApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
