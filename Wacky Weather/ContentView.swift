@@ -26,6 +26,8 @@ struct ContentView: View {
     @State var attText: String?
     @State var attURL: URL?
     
+    @StateObject var locationDataManager = LocationDataManager()
+    
     @AppStorage("isDarkMode") private var isDarkMode = false
     
     func getWeather() async {
@@ -59,6 +61,30 @@ struct ContentView: View {
         if let weather = weather {
             let theTemperature = weather.currentWeather.temperature.description
             let theDescription = weather.currentWeather.condition.description
+            
+            
+            VStack {
+                        switch locationDataManager.locationManager.authorizationStatus {
+                        case .authorizedWhenInUse:  // Location services are available.
+                            // Insert code here of what should happen when Location services are authorized
+                            Text("Your current location is:")
+                            Text("Latitude: \(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")")
+                            Text("Longitude: \(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")")
+                            
+                        case .restricted, .denied:  // Location services currently unavailable.
+                            // Insert code here of what should happen when Location services are NOT authorized
+                            Text("Current location data was restricted or denied.")
+                        case .notDetermined:        // Authorization not determined yet.
+                            Text("Finding your location...")
+                            ProgressView()
+                        default:
+                            ProgressView()
+                        }
+                    }
+            
+            
+            
+            
             VStack{
                 Spacer()
                 Text("Toronto").font(.largeTitle).padding(.bottom, -20.0).foregroundColor(.blue)
@@ -75,7 +101,7 @@ struct ContentView: View {
                 Image(systemName: weather.currentWeather.symbolName).padding(/*@START_MENU_TOKEN@*/.all, 4.0/*@END_MENU_TOKEN@*/).font(.title)
                 
                 //Tests if screen refreshed
-                Text("Random number is \(Int.random(in: 1..<100))")
+                Text("Your lucky numbers are \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49))")
                 
                 //Hack to refresh screen
                 Toggle("Dark Mode", isOn: $isDarkMode).hidden()
