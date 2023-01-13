@@ -122,7 +122,7 @@ struct ContentView: View {
             
             VStack{
                 Spacer()
-                Text("Tap to speak").font(.largeTitle).padding(.bottom, -20.0).foregroundColor(.red).multilineTextAlignment(.center)
+                Text("Tap to hear weather").font(.largeTitle).padding(.bottom, -20.0).foregroundColor(.red).multilineTextAlignment(.center)
                 
                 Text(theTemperature)
                     .font(.system(size: 60))
