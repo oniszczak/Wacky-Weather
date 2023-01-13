@@ -14,7 +14,14 @@ class LocationDataManager : NSObject, ObservableObject, CLLocationManagerDelegat
     
     override init() {
         super.init()
+        
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        //locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+        
         locationManager.delegate = self
+        
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {

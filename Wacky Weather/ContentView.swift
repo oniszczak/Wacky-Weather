@@ -16,12 +16,12 @@ struct ContentView: View {
     
     
 //***********************************************************
-    //static let location =
-    //static let location =
-    //CLLocation(
-    //    latitude: .init(floatLiteral: 43.6588820),
-    //    longitude: .init(floatLiteral: 79.4852880)
-    //)
+    
+    static let location =
+    CLLocation(
+        latitude: .init(floatLiteral: 43.6588820),
+        longitude: .init(floatLiteral: 79.4852880)
+    )
     
     @State var weather: Weather?
     @State var attribution: WeatherAttribution?
@@ -30,8 +30,16 @@ struct ContentView: View {
     @State var attURL: URL?
     
     @StateObject var locationDataManager = LocationDataManager()
-    
     @AppStorage("isDarkMode") private var isDarkMode = false
+    
+    
+    
+    @State var refresh: Bool = false
+    func update() {
+       refresh.toggle()
+    }
+    
+    
     
     func getWeather() async {
         
@@ -77,10 +85,11 @@ struct ContentView: View {
     
     var body: some View {
         
-        if let weather = weather {
-            let theTemperature = weather.currentWeather.temperature.description
-            let theDescription = weather.currentWeather.condition.description
+        if var weather = weather {
+            var theTemperature = weather.currentWeather.temperature.description
+            var theDescription = weather.currentWeather.condition.description
             
+            //let xxx = weather.currentWeather.dewPoint.description
             
             //let theLatitude = locationDataManager.locationManager.location?.coordinate.latitude.description
             //let theLongitude = locationDataManager.locationManager.location?.coordinate.longitude.description
@@ -113,7 +122,7 @@ struct ContentView: View {
             
             VStack{
                 Spacer()
-                Text("Toronto").font(.largeTitle).padding(.bottom, -20.0).foregroundColor(.blue)
+                Text("Tap to speak").font(.largeTitle).padding(.bottom, -20.0).foregroundColor(.red).multilineTextAlignment(.center)
                 
                 Text(theTemperature)
                     .font(.system(size: 60))
@@ -124,7 +133,9 @@ struct ContentView: View {
                 
                 Text(theDescription).font(.title).padding(/*@START_MENU_TOKEN@*/[.leading, .bottom, .trailing], 1.0/*@END_MENU_TOKEN@*/)
                 
+                
                 Image(systemName: weather.currentWeather.symbolName).padding(/*@START_MENU_TOKEN@*/.all, 4.0/*@END_MENU_TOKEN@*/).font(.title)
+                
                 
                 //Tests if screen refreshed
                 Text("Your lucky numbers are \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49))")
@@ -132,11 +143,13 @@ struct ContentView: View {
                 //Hack to refresh screen
                 Toggle("Dark Mode", isOn: $isDarkMode).hidden()
                 Button("Refresh") {
+                    
                     if isDarkMode == true {
                         isDarkMode = false
                     } else {
                         isDarkMode = true
                     }
+                    update()
                 }
                 
                 
@@ -164,13 +177,8 @@ struct ContentView: View {
                     }
             }
         
-        
-        
     }
-    
-    
-    
-    
+
 }
 
 
