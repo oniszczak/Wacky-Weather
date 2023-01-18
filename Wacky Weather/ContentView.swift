@@ -30,7 +30,7 @@ struct ContentView: View {
     @State var attURL: URL?
     
     @StateObject var locationDataManager = LocationDataManager()
-    @AppStorage("isDarkMode") private var isDarkMode = false
+    //@AppStorage("isDarkMode") private var isDarkMode = false
     
     
     
@@ -88,9 +88,9 @@ struct ContentView: View {
     
     var body: some View {
         
-        if var weather = weather {
-            var theTemperature = weather.currentWeather.temperature.description
-            var theDescription = weather.currentWeather.condition.description
+        if let weather = weather {
+            let theTemperature = weather.currentWeather.temperature.description
+            let theDescription = weather.currentWeather.condition.description
             
             //let xxx = weather.currentWeather.dewPoint.description
             
@@ -145,7 +145,7 @@ struct ContentView: View {
                 Text("Your lucky numbers are \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49))")
                 
                 //Hack to refresh screen
-                Toggle("Dark Mode", isOn: $isDarkMode).hidden()
+                //Toggle("Dark Mode", isOn: $isDarkMode).hidden()
                 /*
                  Button("Refresh") {
                  if isDarkMode == true {
@@ -157,12 +157,13 @@ struct ContentView: View {
                  }
                  */
                 Button("Refresh", action:  {
-                    isDarkMode.toggle()
+                    // Refresh lotto numbers
+                    //isDarkMode.toggle()
+                    //Refresh weather
                     Task {
                             await getWeather()
                         }
-                    
-                })
+                }).padding()
                 
                 Spacer()
                 Link(attText ?? "Apple Weather", destination: attURL ?? URL(string: "https://apple.com/")!)
