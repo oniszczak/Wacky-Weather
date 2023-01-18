@@ -28,7 +28,7 @@ struct ContentView: View {
     //@State var theTemperature: String?
     @State var attText: String?
     @State var attURL: URL?
-    
+    @State private var animatingButton = false
     @StateObject var locationDataManager = LocationDataManager()
     //@AppStorage("isDarkMode") private var isDarkMode = false
     
@@ -142,33 +142,33 @@ struct ContentView: View {
                 
                 
                 //Tests if screen refreshed
-                Text("Your lucky numbers are \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49))")
+                Text("Your lucky numbers: \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49)) \(Int.random(in: 1..<49))")
                 
-                //Hack to refresh screen
-                //Toggle("Dark Mode", isOn: $isDarkMode).hidden()
-                /*
-                 Button("Refresh") {
-                 if isDarkMode == true {
-                 isDarkMode = false
-                 } else {
-                 isDarkMode = true
-                 }
-                 update()
-                 }
-                 */
-                Button("Refresh", action:  {
-                    // Refresh lotto numbers
-                    //isDarkMode.toggle()
-                    //Refresh weather
-                    Task {
-                            await getWeather()
-                        }
-                }).padding()
+                
+                Button{
+                    //withAnimation(.easeInOut(duration: 0.3).repeatCount(4, autoreverses: true)) {
+                    withAnimation(.spring(response: 0.5, dampingFraction: 0.3, blendDuration: 0)) {
+                        animatingButton.toggle()
+                        Task {
+                                await getWeather()
+                            }
+                    }
+                } label: {
+                    Text("Refresh")
+                        
+                        .scaleEffect(animatingButton ? 1.8 : 1.3)
+                    
+                        //.shadow(radius: 1)
+                        .bold()
+                        //.font(.system(size: 9))
+                            
+                        
+                }.padding()
+                
                 
                 Spacer()
                 Link(attText ?? "Apple Weather", destination: attURL ?? URL(string: "https://apple.com/")!)
             }
-            
             
             
             // Apple Weather Attribution
