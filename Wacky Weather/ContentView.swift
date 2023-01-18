@@ -15,7 +15,7 @@ struct ContentView: View {
     let synthesizer = AVSpeechSynthesizer()
     
     
-//***********************************************************
+    //***********************************************************
     
     static let location =
     CLLocation(
@@ -36,7 +36,7 @@ struct ContentView: View {
     
     @State var refresh: Bool = false
     func update() {
-       refresh.toggle()
+        refresh.toggle()
     }
     
     
@@ -62,10 +62,13 @@ struct ContentView: View {
                     fatalError("\(error)")
                 }
                 
+                print("getWeather called")
+                print(weather?.currentWeather.temperature.description)
             }
         }
         
     }
+    
     
     func speakWeather(_ Temperature: String, _ Description: String) -> Void {
         print ("speakWeather")
@@ -76,7 +79,7 @@ struct ContentView: View {
         let utterance = AVSpeechUtterance(string: fullSentence)
         utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
         utterance.rate = 0.1
-
+        
         //let synthesizer = AVSpeechSynthesizer()
         synthesizer.speak(utterance)
         return
@@ -95,27 +98,27 @@ struct ContentView: View {
             //let theLongitude = locationDataManager.locationManager.location?.coordinate.longitude.description
             
             VStack {
-                        switch locationDataManager.locationManager.authorizationStatus {
-                        case .authorizedWhenInUse:  // Location services are available.
-                            // Insert code here of what should happen when Location services are authorized
-                            
-                            //let theLatitude = locationDataManager.locationManager.location?.coordinate.latitude.description
-                            //let theLongitude = locationDataManager.locationManager.location?.coordinate.longitude.description
-                            
-                            Text("Your current location is:")
-                            Text("Latitude: \(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")")
-                            Text("Longitude: \(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")")
-                            
-                        case .restricted, .denied:  // Location services currently unavailable.
-                            // Insert code here of what should happen when Location services are NOT authorized
-                            Text("Current location data was restricted or denied.")
-                        case .notDetermined:        // Authorization not determined yet.
-                            Text("Finding your location...")
-                            ProgressView()
-                        default:
-                            ProgressView()
-                        }
-                    }
+                switch locationDataManager.locationManager.authorizationStatus {
+                case .authorizedWhenInUse:  // Location services are available.
+                    // Insert code here of what should happen when Location services are authorized
+                    
+                    //let theLatitude = locationDataManager.locationManager.location?.coordinate.latitude.description
+                    //let theLongitude = locationDataManager.locationManager.location?.coordinate.longitude.description
+                    
+                    Text("Your current location is:")
+                    Text("Latitude: \(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")")
+                    Text("Longitude: \(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")")
+                    
+                case .restricted, .denied:  // Location services currently unavailable.
+                    // Insert code here of what should happen when Location services are NOT authorized
+                    Text("Current location data was restricted or denied.")
+                case .notDetermined:        // Authorization not determined yet.
+                    Text("Finding your location...")
+                    ProgressView()
+                default:
+                    ProgressView()
+                }
+            }
             
             
             
@@ -131,6 +134,7 @@ struct ContentView: View {
                         speakWeather (theTemperature, theDescription)
                     }
                 
+                
                 Text(theDescription).font(.title).padding(/*@START_MENU_TOKEN@*/[.leading, .bottom, .trailing], 1.0/*@END_MENU_TOKEN@*/)
                 
                 
@@ -142,20 +146,29 @@ struct ContentView: View {
                 
                 //Hack to refresh screen
                 Toggle("Dark Mode", isOn: $isDarkMode).hidden()
-                Button("Refresh") {
+                /*
+                 Button("Refresh") {
+                 if isDarkMode == true {
+                 isDarkMode = false
+                 } else {
+                 isDarkMode = true
+                 }
+                 update()
+                 }
+                 */
+                Button("Refresh", action:  {
+                    isDarkMode.toggle()
+                    Task {
+                            await getWeather()
+                        }
                     
-                    if isDarkMode == true {
-                        isDarkMode = false
-                    } else {
-                        isDarkMode = true
-                    }
-                    update()
-                }
-                
+                })
                 
                 Spacer()
                 Link(attText ?? "Apple Weather", destination: attURL ?? URL(string: "https://apple.com/")!)
             }
+            
+            
             
             // Apple Weather Attribution
             .task {
@@ -170,17 +183,16 @@ struct ContentView: View {
                 }
             }
             
-            } else {
-                    ProgressView()
-                    .task {
-                        await getWeather ()
-                    }
-            }
+        } else {
+            ProgressView()
+                .task {
+                    await getWeather ()
+                }
+        }
         
     }
-
+    
 }
-
 
 
 struct ContentView_Previews: PreviewProvider {
