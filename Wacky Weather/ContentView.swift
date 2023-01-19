@@ -144,8 +144,8 @@ struct ContentView: View {
                 
                 
                 Button{
-                    //withAnimation(.easeInOut(duration: 0.3).repeatCount(4, autoreverses: true)) {
-                    withAnimation(.spring(response: 0.5, dampingFraction: 0.3, blendDuration: 0)) {
+                    withAnimation(.easeInOut(duration: 0.3).repeatCount(4, autoreverses: true)) {
+                    //withAnimation(.spring(response: 0.5, dampingFraction: 0.3, blendDuration: 0)) {
                         animatingButton.toggle()
                         self.scaleValue = 1.8
                         Task {
@@ -154,7 +154,7 @@ struct ContentView: View {
                     }
                     Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
                         withAnimation {
-                            self.scaleValue = 1.0
+                            self.scaleValue = 1.3
                         }}
                     //withAnimation(.spring(response: 0.5, dampingFraction: 0.3, blendDuration: 0)) {
                     //withAnimation(.easeInOut(duration: 0.3).repeatCount(4, autoreverses: true)) {
@@ -162,19 +162,12 @@ struct ContentView: View {
                     //}
                 } label: {
                     Text("Refresh")
-                    //if animatingButton == false {
-                    //    self.scaleEffect(animatingButton ? 1.8 : 1.3)
-                    //}
-                    //else {
-                    //    self.scaleEffect(animatingButton ? 1.3 : 1.0)
-                    //}
-                    //    //.shadow(radius: 1)
+                        //.shadow(radius: 1)
                         //.scaleEffect(animatingButton ? 1.8 : 1.3)
                         .scaleEffect(self.scaleValue)
                         .bold()
                         //.font(.system(size: 9))
                             
-                        
                 }.padding()
                 
                 
