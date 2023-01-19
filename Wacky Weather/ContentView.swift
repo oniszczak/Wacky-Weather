@@ -63,7 +63,7 @@ struct ContentView: View {
                 }
                 
                 print("getWeather called")
-                print(weather?.currentWeather.temperature.description)
+                print(weather!.currentWeather.temperature.description)
             }
         }
         
