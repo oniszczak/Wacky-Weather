@@ -32,7 +32,7 @@ struct ContentView: View {
     @StateObject var locationDataManager = LocationDataManager()
     //@AppStorage("isDarkMode") private var isDarkMode = false
     
-    
+    @State var scaleValue = 1.0
     
     @State var refresh: Bool = false
     func update() {
@@ -121,8 +121,6 @@ struct ContentView: View {
             }
             
             
-            
-            
             VStack{
                 Spacer()
                 Text("Tap to hear weather").font(.largeTitle).padding(.bottom, -20.0).foregroundColor(.red).multilineTextAlignment(.center)
@@ -149,16 +147,30 @@ struct ContentView: View {
                     //withAnimation(.easeInOut(duration: 0.3).repeatCount(4, autoreverses: true)) {
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.3, blendDuration: 0)) {
                         animatingButton.toggle()
+                        self.scaleValue = 1.8
                         Task {
                                 await getWeather()
                             }
                     }
+                    Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+                        withAnimation {
+                            self.scaleValue = 1.0
+                        }}
+                    //withAnimation(.spring(response: 0.5, dampingFraction: 0.3, blendDuration: 0)) {
+                    //withAnimation(.easeInOut(duration: 0.3).repeatCount(4, autoreverses: true)) {
+                        
+                    //}
                 } label: {
                     Text("Refresh")
-                        
-                        .scaleEffect(animatingButton ? 1.8 : 1.3)
-                    
-                        //.shadow(radius: 1)
+                    //if animatingButton == false {
+                    //    self.scaleEffect(animatingButton ? 1.8 : 1.3)
+                    //}
+                    //else {
+                    //    self.scaleEffect(animatingButton ? 1.3 : 1.0)
+                    //}
+                    //    //.shadow(radius: 1)
+                        //.scaleEffect(animatingButton ? 1.8 : 1.3)
+                        .scaleEffect(self.scaleValue)
                         .bold()
                         //.font(.system(size: 9))
                             
